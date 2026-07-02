@@ -1,0 +1,35 @@
+{
+  "name": "blindspot-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A media analysis tool that visualizes how often news topics fall into political blindspots over time. Built to complement Ground News.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "gen-data": "node scripts/gen-data.mjs",
+    "fetch-data": "node scripts/fetch-real-data.mjs",
+    "fetch-newsdata": "node scripts/fetch-newsdata.mjs"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.6.0",
+    "jsdom": "^29.1.1",
+    "next": "14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.12.7"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^28.0.3",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.3"
+  }
+}

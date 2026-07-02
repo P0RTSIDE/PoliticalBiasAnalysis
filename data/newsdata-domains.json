@@ -1,0 +1,8 @@
+{
+  "fix": {
+    "cnn.com": "edition.cnn.com"
+  },
+  "bad": [
+    "realclearpolitics.com"
+  ]
+}
