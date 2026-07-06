@@ -62,6 +62,100 @@
         "right": 12,
         "center": 0
       }
+    },
+    "2026-W27": {
+      "Immigration": {
+        "left": 15,
+        "right": 73,
+        "center": 0
+      },
+      "Climate": {
+        "left": 8,
+        "right": 2,
+        "center": 0
+      },
+      "Gun Control": {
+        "left": 0,
+        "right": 2,
+        "center": 0
+      },
+      "Healthcare": {
+        "left": 2,
+        "right": 12,
+        "center": 0
+      },
+      "Foreign Policy": {
+        "left": 3,
+        "right": 12,
+        "center": 0
+      },
+      "Economy": {
+        "left": 16,
+        "right": 43,
+        "center": 0
+      }
+    },
+    "2026-W28": {
+      "Immigration": {
+        "left": 5,
+        "right": 9,
+        "center": 0
+      },
+      "Climate": {
+        "left": 2,
+        "right": 1,
+        "center": 0
+      },
+      "Gun Control": {
+        "left": 0,
+        "right": 0,
+        "center": 0
+      },
+      "Healthcare": {
+        "left": 2,
+        "right": 4,
+        "center": 0
+      },
+      "Foreign Policy": {
+        "left": 1,
+        "right": 5,
+        "center": 0
+      },
+      "Economy": {
+        "left": 9,
+        "right": 7,
+        "center": 0
+      },
+      "Education": {
+        "left": 9,
+        "right": 10,
+        "center": 0
+      },
+      "Crime": {
+        "left": 1,
+        "right": 0,
+        "center": 0
+      },
+      "Science": {
+        "left": 1,
+        "right": 0,
+        "center": 0
+      },
+      "Local Politics": {
+        "left": 0,
+        "right": 4,
+        "center": 0
+      },
+      "International": {
+        "left": 2,
+        "right": 1,
+        "center": 0
+      },
+      "Religion": {
+        "left": 5,
+        "right": 2,
+        "center": 0
+      }
     }
   }
 }

@@ -238,38 +238,58 @@ async function rateLimit() {
 // NOTE: /latest already returns the last ~48h. The `timeframe` parameter is a
 // paid-only feature (free tier rejects it with HTTP 422), so it's omitted.
 async function requestCount(qPhrase, group) {
-  await rateLimit();
-  const url =
-    `${API_BASE}?apikey=${encodeURIComponent(API_KEY)}` +
-    `&q=${encodeURIComponent(qPhrase)}` +
-    `&${DOMAIN_PARAM}=${encodeURIComponent(group.join(","))}` +
-    `&language=${LANGUAGE}`;
-  const res = await fetch(url);
-  const text = await res.text();
-  let json;
-  try {
-    json = JSON.parse(text);
-  } catch {
-    throw new Error(`Non-JSON response (HTTP ${res.status}): ${text.slice(0, 120)}`);
+  const MAX_NET_RETRIES = 3;
+
+  for (let netAttempt = 0; netAttempt <= MAX_NET_RETRIES; netAttempt++) {
+    try {
+      await rateLimit();
+      const url =
+        `${API_BASE}?apikey=${encodeURIComponent(API_KEY)}` +
+        `&q=${encodeURIComponent(qPhrase)}` +
+        `&${DOMAIN_PARAM}=${encodeURIComponent(group.join(","))}` +
+        `&language=${LANGUAGE}`;
+      const res = await fetch(url);
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        throw new Error(`Non-JSON response (HTTP ${res.status}): ${text.slice(0, 120)}`);
+      }
+      if (json.status === "success") {
+        await sleep(REQUEST_DELAY_MS);
+        return { total: Number(json.totalResults) || 0 };
+      }
+      // Healable case: an unregistered domain. Report it + suggestion.
+      const invEntry = Array.isArray(json.results)
+        ? json.results.find((r) => r && r.invalid_domain)
+        : null;
+      if (invEntry) {
+        await sleep(REQUEST_DELAY_MS);
+        return {
+          invalid: invEntry.invalid_domain,
+          suggestion: Array.isArray(invEntry.suggestion) ? invEntry.suggestion[0] : null,
+        };
+      }
+      const msg = json.results?.message || json.message || JSON.stringify(json).slice(0, 160);
+      if (res.status === 429) throw new Error(`Rate limited by NewsData (429): ${msg}`);
+      throw new Error(`NewsData error (HTTP ${res.status}): ${msg}`);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      const code = err instanceof Error && err.cause && typeof err.cause === "object" && "code" in err.cause
+        ? String(err.cause.code)
+        : "";
+      const isNetwork = /fetch failed|ECONNRESET|ETIMEDOUT|ENOTFOUND|ECONNREFUSED|socket hang up/i.test(
+        `${msg} ${code}`
+      );
+      // API / quota errors should not be retried as network blips.
+      if (!isNetwork || netAttempt === MAX_NET_RETRIES) throw err;
+      const wait = 4000 * (netAttempt + 1);
+      console.warn(`   network blip (${code || msg}) — retry ${netAttempt + 1}/${MAX_NET_RETRIES} in ${wait / 1000}s`);
+      await sleep(wait);
+    }
   }
-  if (json.status === "success") {
-    await sleep(REQUEST_DELAY_MS);
-    return { total: Number(json.totalResults) || 0 };
-  }
-  // Healable case: an unregistered domain. Report it + suggestion.
-  const invEntry = Array.isArray(json.results)
-    ? json.results.find((r) => r && r.invalid_domain)
-    : null;
-  if (invEntry) {
-    await sleep(REQUEST_DELAY_MS);
-    return {
-      invalid: invEntry.invalid_domain,
-      suggestion: Array.isArray(invEntry.suggestion) ? invEntry.suggestion[0] : null,
-    };
-  }
-  const msg = json.results?.message || json.message || JSON.stringify(json).slice(0, 160);
-  if (res.status === 429) throw new Error(`Rate limited by NewsData (429): ${msg}`);
-  throw new Error(`NewsData error (HTTP ${res.status}): ${msg}`);
+  throw new Error("requestCount exhausted retries");
 }
 
 async function countArticles(qPhrase, domains) {
@@ -426,18 +446,6 @@ async function main() {
     process.exit(1);
   }
 
-  // Measure the current week.
-  const todaySnapshot = {};
-  for (const [topic, q] of Object.entries(TOPIC_QUERIES)) {
-    process.stdout.write(`• ${topic} … `);
-    const left = await countArticles(q, usedLeft);
-    const right = await countArticles(q, usedRight);
-    const center = usedCenter.length ? await countArticles(q, usedCenter) : 0;
-    todaySnapshot[topic] = { left, right, center };
-    console.log(`L:${left} R:${right} C:${center}`);
-  }
-
-  // Load + merge persisted snapshots, then prune to the visible window.
   const snapPath = join(dataDir, "snapshots.json");
   let store = { schema: 1, snapshots: {} };
   if (existsSync(snapPath)) {
@@ -448,51 +456,74 @@ async function main() {
       /* start fresh on parse error */
     }
   }
-  store.snapshots[currentWeek] = todaySnapshot;
-  const visible = new Set(weeks);
-  for (const w of Object.keys(store.snapshots)) {
-    if (!visible.has(w)) delete store.snapshots[w];
+
+  function persistProgress(todaySnapshot, final = false) {
+    store.snapshots[currentWeek] = todaySnapshot;
+    const visible = new Set(weeks);
+    for (const w of Object.keys(store.snapshots)) {
+      if (!visible.has(w)) delete store.snapshots[w];
+    }
+    writeFileSync(snapPath, JSON.stringify(store, null, 2) + "\n");
+
+    const { topics, categories } = rebuildFromSnapshots(store.snapshots);
+    writeFileSync(
+      join(dataDir, "blindspot-history.json"),
+      JSON.stringify({ weeks, topics }, null, 2) + "\n"
+    );
+    writeFileSync(
+      join(dataDir, "coverage-gaps.json"),
+      JSON.stringify({ weeks, categories }, null, 2) + "\n"
+    );
+
+    const weeksCollected = Object.keys(store.snapshots).length;
+    writeFileSync(
+      join(dataDir, "source.json"),
+      JSON.stringify(
+        {
+          mode: "live-newsdata",
+          fetchedAt: new Date().toISOString(),
+          weeks: NUM_WEEKS,
+          weeksCollected,
+          provider: "NewsData.io (latest, 48h snapshots)",
+          biasSource: "AllSides / Ad Fontes Media / Media Bias Fact Check (3-org consensus)",
+          outletCount: usedLeft.length + usedCenter.length + usedRight.length,
+        },
+        null,
+        2
+      ) + "\n"
+    );
+
+    if (final) {
+      console.log(
+        `\n✓ Wrote real snapshot for ${currentWeek}. ${weeksCollected} of ${NUM_WEEKS} ` +
+          `weeks now hold real data. Re-run periodically to accumulate more history.`
+      );
+    }
   }
-  writeFileSync(snapPath, JSON.stringify(store, null, 2) + "\n");
 
-  // Rebuild the app's data files from all accumulated snapshots.
-  const { topics, categories } = rebuildFromSnapshots(store.snapshots);
-  writeFileSync(
-    join(dataDir, "blindspot-history.json"),
-    JSON.stringify({ weeks, topics }, null, 2) + "\n"
-  );
-  writeFileSync(
-    join(dataDir, "coverage-gaps.json"),
-    JSON.stringify({ weeks, categories }, null, 2) + "\n"
-  );
+  // Measure the current week.
+  const todaySnapshot = {};
+  for (const [topic, q] of Object.entries(TOPIC_QUERIES)) {
+    process.stdout.write(`• ${topic} … `);
+    const left = await countArticles(q, usedLeft);
+    const right = await countArticles(q, usedRight);
+    const center = usedCenter.length ? await countArticles(q, usedCenter) : 0;
+    todaySnapshot[topic] = { left, right, center };
+    console.log(`L:${left} R:${right} C:${center}`);
+    persistProgress(todaySnapshot);
+  }
 
-  const weeksCollected = Object.keys(store.snapshots).length;
-  writeFileSync(
-    join(dataDir, "source.json"),
-    JSON.stringify(
-      {
-        mode: "live-newsdata",
-        fetchedAt: new Date().toISOString(),
-        weeks: NUM_WEEKS,
-        weeksCollected,
-        provider: "NewsData.io (latest, 48h snapshots)",
-        biasSource: "AllSides / Ad Fontes Media / Media Bias Fact Check (3-org consensus)",
-        outletCount: usedLeft.length + usedCenter.length + usedRight.length,
-      },
-      null,
-      2
-    ) + "\n"
-  );
-
-  console.log(
-    `\n✓ Wrote real snapshot for ${currentWeek}. ${weeksCollected} of ${NUM_WEEKS} ` +
-      `weeks now hold real data. Re-run periodically to accumulate more history.`
-  );
+  persistProgress(todaySnapshot, true);
 }
 
 main().catch((err) => {
   console.error("\n✗ Fetch failed:", err.message);
-  if (/429|rate/i.test(err.message)) {
+  if (/fetch failed|ECONNRESET|ETIMEDOUT|socket hang up/i.test(err.message)) {
+    console.error(
+      "Network connection dropped mid-fetch (common on café/public Wi‑Fi). " +
+        "Partial progress is saved after each topic — re-run the same command to continue."
+    );
+  } else if (/429|rate/i.test(err.message)) {
     console.error(
       "Free tier allows 30 credits/15min and 200/day. Wait and re-run, or " +
         "use the default (top N/side) instead of --full."
