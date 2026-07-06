@@ -1,7 +1,5 @@
 {
   "weeks": [
-    "2026-W07",
-    "2026-W08",
     "2026-W09",
     "2026-W10",
     "2026-W11",
@@ -19,12 +17,12 @@
     "2026-W23",
     "2026-W24",
     "2026-W25",
-    "2026-W26"
+    "2026-W26",
+    "2026-W27",
+    "2026-W28"
   ],
   "topics": {
     "Immigration": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -42,11 +40,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "left-blindspot",
+      "2026-W28": "absent"
     },
     "Climate": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -64,11 +62,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "right-blindspot",
+      "2026-W28": "right-blindspot"
     },
     "Gun Control": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -86,11 +84,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "left-blindspot",
+      "2026-W28": "absent"
     },
     "Healthcare": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -108,11 +106,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "left-blindspot"
+      "2026-W26": "left-blindspot",
+      "2026-W27": "left-blindspot",
+      "2026-W28": "left-blindspot"
     },
     "Foreign Policy": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -130,11 +128,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "left-blindspot",
+      "2026-W28": "left-blindspot"
     },
     "Economy": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -152,11 +150,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "left-blindspot",
+      "2026-W28": "balanced"
     },
     "Education": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -174,11 +172,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "left-blindspot"
+      "2026-W26": "left-blindspot",
+      "2026-W27": "absent",
+      "2026-W28": "balanced"
     },
     "Crime": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -196,11 +194,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "left-blindspot"
+      "2026-W26": "left-blindspot",
+      "2026-W27": "absent",
+      "2026-W28": "right-blindspot"
     },
     "Science": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -218,11 +216,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "absent",
+      "2026-W28": "right-blindspot"
     },
     "Local Politics": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -240,11 +238,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "left-blindspot"
+      "2026-W26": "left-blindspot",
+      "2026-W27": "absent",
+      "2026-W28": "left-blindspot"
     },
     "International": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -262,11 +260,11 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "balanced"
+      "2026-W26": "balanced",
+      "2026-W27": "absent",
+      "2026-W28": "right-blindspot"
     },
     "Religion": {
-      "2026-W07": "absent",
-      "2026-W08": "absent",
       "2026-W09": "absent",
       "2026-W10": "absent",
       "2026-W11": "absent",
@@ -284,7 +282,9 @@
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
-      "2026-W26": "left-blindspot"
+      "2026-W26": "left-blindspot",
+      "2026-W27": "absent",
+      "2026-W28": "right-blindspot"
     }
   }
 }
