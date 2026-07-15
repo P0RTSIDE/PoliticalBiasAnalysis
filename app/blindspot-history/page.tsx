@@ -20,6 +20,7 @@ import {
   type DrawerSelection,
 } from "@/components/SidePanelDrawer";
 import { DataSourceBadge } from "@/components/DataSourceBadge";
+import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 const history = historyData as BlindspotHistory;
 const ALL_TOPICS = Object.keys(history.topics);
@@ -63,10 +64,11 @@ export default function BlindspotHistoryPage() {
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-text-secondary">
           Each cell is one topic in one week. Color shows whether coverage was
-          asymmetric — heavily carried by one side of the spectrum — or balanced
+          asymmetric (heavily carried by one side of the spectrum) or balanced
           across outlets. Click any cell to inspect sample coverage from that
           week.
         </p>
+        <WeeklyDataDisclaimer className="mt-4" />
       </header>
 
       <div className="my-8 h-px bg-hairline" />
@@ -194,8 +196,8 @@ export default function BlindspotHistoryPage() {
                 <span>
                   <span className="font-medium text-text-primary">
                     Right-side blindspot
-                  </span>{" "}
-                  — left outlets ≥ 65% of left+right volume.
+                  </span>
+                  : left outlets ≥ 65% of left+right volume.
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -203,8 +205,8 @@ export default function BlindspotHistoryPage() {
                 <span>
                   <span className="font-medium text-text-primary">
                     Left-side blindspot
-                  </span>{" "}
-                  — right outlets ≥ 65% of left+right volume.
+                  </span>
+                  : right outlets ≥ 65% of left+right volume.
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -212,8 +214,8 @@ export default function BlindspotHistoryPage() {
                 <span>
                   <span className="font-medium text-text-primary">
                     Balanced
-                  </span>{" "}
-                  — neither side reached 65%.
+                  </span>
+                  : neither side reached 65%.
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -221,8 +223,9 @@ export default function BlindspotHistoryPage() {
                 <span>
                   <span className="font-medium text-text-primary">
                     Not in top stories
-                  </span>{" "}
-                  — weekly volume below 25% of the topic&apos;s median.
+                  </span>
+                  : weekly volume below 25% of the topic&apos;s median, or no
+                  snapshot was collected for that week.
                 </span>
               </li>
             </ul>
@@ -231,9 +234,19 @@ export default function BlindspotHistoryPage() {
                 Chronic blindspot %
               </span>{" "}
               (in the ranked list below) is the share of in-coverage weeks that
-              were any kind of one-sided blindspot — weeks where the topic
-              wasn&apos;t in the news at all are excluded so sparse topics
-              aren&apos;t unfairly diluted.
+              were any kind of one-sided blindspot. Weeks where the topic
+              wasn&apos;t in the news at all, or where no live snapshot exists
+              yet, are excluded so sparse topics aren&apos;t unfairly diluted.
+            </p>
+            <p>
+              <span className="font-medium text-text-primary">
+                Partial history
+              </span>{" "}
+              The grid always shows a 20 week window, but live data fills in one
+              week at a time. Until enough weekly snapshots are collected, most
+              cells stay empty. Rankings and percentages reflect only the weeks
+              that actually have measurements, so early results can shift as
+              more history accumulates.
             </p>
             <p>
               See the{" "}

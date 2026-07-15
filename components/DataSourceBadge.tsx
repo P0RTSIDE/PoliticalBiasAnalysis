@@ -7,7 +7,7 @@ const source = sourceData as DataSource;
 /**
  * Small, honest provenance badge shown on data pages. Reads data/source.json,
  * which the data scripts write: "mock" (seeded generator) or a "live-*" mode
- * (real coverage — GDELT full history, or NewsData.io accumulating snapshots).
+ * (real coverage: GDELT full history, or NewsData.io accumulating snapshots).
  */
 export function DataSourceBadge({ className }: { className?: string }) {
   const isLive = source.mode.startsWith("live");

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 export const metadata: Metadata = {
   title: "About | Blindspot Tracker",
@@ -50,6 +51,7 @@ export default function AboutPage() {
           who want to see patterns in who covers what, not just where individual
           outlets sit on a bias chart.
         </p>
+        <WeeklyDataDisclaimer className="mt-4" />
       </header>
 
       <div className="my-6 h-px bg-hairline" />
@@ -308,6 +310,70 @@ export default function AboutPage() {
             reproducibility from open inputs.
           </p>
         </div>
+      </Section>
+
+      <div className="h-px bg-hairline" />
+
+      <Section title="Why not all 20 weeks show data">
+        <p>
+          The charts always use a fixed 20 week window so layout and comparisons
+          stay consistent. That does not mean 20 weeks of measurements exist
+          yet. With the current NewsData.io pipeline, each update captures only
+          the last 48 hours of articles and saves one weekly snapshot. History
+          grows forward as new snapshots are added, typically one week per run.
+          The free tier does not expose a historical archive, so past weeks
+          cannot be backfilled automatically.
+        </p>
+        <p>
+          Weeks without a snapshot appear on the heatmap as{" "}
+          <span className="font-medium text-text-primary">
+            not in top stories
+          </span>{" "}
+          (empty or dashed cells). The site does not invent values for those
+          weeks. The data badge on each page shows how many real weeks have been
+          collected so far.
+        </p>
+        <p className="font-medium text-text-primary">
+          How partial history affects each view
+        </p>
+        <ul className="list-inside list-disc space-y-2 pl-1">
+          <li>
+            <span className="font-medium text-text-primary">
+              Blindspot History
+            </span>
+            : most cells stay empty until enough weekly snapshots exist. Chronic
+            blindspot percentages count only weeks where a topic actually had
+            measurable coverage, but the grid still spans the full 20 week
+            range.
+          </li>
+          <li>
+            <span className="font-medium text-text-primary">
+              Coverage Gap Study
+            </span>
+            : category totals, divergence scores, and auto-generated findings
+            aggregate across collected weeks only. Weeks without data add zero
+            volume and show as flat lines in the weekly trend.
+          </li>
+          <li>
+            <span className="font-medium text-text-primary">Home page</span>:
+            headline stats use the same 20 week window. Blindspot counts include
+            only weeks classified as blindspots, not empty weeks. Story totals
+            reflect volume from collected snapshots so far.
+          </li>
+          <li>
+            <span className="font-medium text-text-primary">
+              Article analyzer
+            </span>
+            : unaffected. It scores individual articles and does not depend on
+            weekly coverage data.
+          </li>
+        </ul>
+        <p>
+          An alternate GDELT pipeline can backfill multiple weeks in one run
+          when the API is reachable, but it is rate limited and unreliable from
+          many networks. Running the NewsData fetch regularly is the practical
+          way to deepen history on the live site.
+        </p>
       </Section>
 
       <div className="h-px bg-hairline" />
