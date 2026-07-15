@@ -23,7 +23,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blindspot Tracker — Coverage asymmetry over time",
+  title: "Blindspot Tracker | Coverage asymmetry over time",
   description:
     "A media analysis tool that visualizes how often news topics fall into political blindspots over time, and quantifies partisan coverage gaps by story category.",
   keywords: [

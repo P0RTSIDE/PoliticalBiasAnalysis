@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { LeanMeter, DimensionBar } from "@/components/LeanMeter";
 import { HighlightedText } from "@/components/HighlightedText";
 import { Skeleton } from "@/components/Skeleton";
+import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 type Mode = "url" | "text";
 
@@ -58,14 +59,15 @@ export default function AnalyzePage() {
           Article Bias Analyzer
         </p>
         <h1 className="mt-2 font-display text-3xl font-bold leading-tight text-text-primary sm:text-4xl">
-          Per-article bias — not just the publication
+          Per-article bias, not just the publication
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-text-secondary">
           Publication-level ratings paint every story from an outlet with the
           same brush. This analyzes a single article&apos;s political lean from
-          its own text — word choice, source selection, framing, and omission —
-          and highlights the specific phrasing driving the score.
+          its own text: word choice, source selection, framing, and omission.
+          It highlights the specific phrasing driving the score.
         </p>
+        <WeeklyDataDisclaimer className="mt-4" scope="analyze" />
       </header>
 
       <div className="my-8 h-px bg-hairline" />
@@ -164,7 +166,7 @@ export default function AnalyzePage() {
               title={
                 result.analyzer === "llm"
                   ? `Analyzed by ${result.model}`
-                  : "No LLM configured — shallow keyword heuristic"
+                  : "No LLM configured: shallow keyword heuristic"
               }
             >
               <span
@@ -259,8 +261,8 @@ export default function AnalyzePage() {
           <p className="font-mono text-[11px] leading-relaxed text-text-secondary/70">
             Article-level estimate for U.S. political context. The LLM rubric is
             calibrated but not infallible; treat scores as an analytical signal,
-            not a verdict. Configure an LLM (see README) for the full assessment
-            — the heuristic fallback is a shallow keyword check only.
+            not a verdict. Configure an LLM (see README) for the full assessment.
+            The heuristic fallback is a shallow keyword check only.
           </p>
         </section>
       )}

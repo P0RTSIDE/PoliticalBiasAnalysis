@@ -118,7 +118,7 @@ export function SidePanelDrawer({ selection, onClose }: SidePanelDrawerProps) {
                 ))}
               </ul>
               <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-text-secondary/70">
-                Illustrative headlines — generated to mirror real metadata shape.
+                Illustrative headlines, generated to mirror real metadata shape.
               </p>
             </>
           ) : (

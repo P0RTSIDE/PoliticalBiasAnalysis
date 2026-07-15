@@ -8,6 +8,7 @@ import { CoverageBarChart } from "@/components/CoverageBarChart";
 import { ScatterPlot } from "@/components/ScatterPlot";
 import { InsightCallout } from "@/components/InsightCallout";
 import { DataSourceBadge } from "@/components/DataSourceBadge";
+import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 const gaps = gapsData as CoverageGaps;
 
@@ -62,6 +63,7 @@ export default function CoverageGapPage() {
           measures how lopsided that left/right split is, from 0 (balanced) to
           100 (one side only).
         </p>
+        <WeeklyDataDisclaimer className="mt-4" />
       </header>
 
       <div className="my-8 h-px bg-hairline" />
@@ -157,8 +159,8 @@ export default function CoverageGapPage() {
               For each story category we measure the share of total coverage
               originating from left-leaning versus right-leaning outlets. An
               outlet&apos;s lean comes from the consensus of three independent
-              monitors — AllSides, Ad Fontes Media, and Media Bias Fact Check
-              — mapped to a common 5-point scale. Center outlets are tracked
+              monitors (AllSides, Ad Fontes Media, and Media Bias Fact Check),
+              mapped to a common 5-point scale. Center outlets are tracked
               for volume but excluded from the left/right split.
             </p>
             <div className="border border-hairline bg-background p-4 font-mono text-xs text-text-primary">
@@ -185,6 +187,15 @@ export default function CoverageGapPage() {
               </span>{" "}
               stores the per-week divergence value so you can see whether a
               category&apos;s gap is widening or narrowing over time.
+            </p>
+            <p>
+              <span className="font-medium text-text-primary">
+                Partial history
+              </span>{" "}
+              Category totals and divergence scores aggregate every week that
+              has a live snapshot. Weeks without data contribute zero volume
+              and appear as flat segments in the weekly trend. Rankings and
+              auto-generated findings can shift as more weeks are collected.
             </p>
             <p>
               Live data comes from article-volume counts (GDELT or NewsData.io)

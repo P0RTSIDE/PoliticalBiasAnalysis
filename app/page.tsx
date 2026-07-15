@@ -3,6 +3,7 @@ import historyData from "@/data/blindspot-history.json";
 import gapsData from "@/data/coverage-gaps.json";
 import type { BlindspotHistory, CoverageGaps } from "@/lib/types";
 import { computeChronicBlindspots, formatNumber } from "@/lib/utils";
+import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 const history = historyData as BlindspotHistory;
 const gaps = gapsData as CoverageGaps;
@@ -70,6 +71,8 @@ export default function HomePage() {
           political blindspots over time, and quantifies the partisan coverage
           gaps between left- and right-leaning outlets.
         </p>
+
+        <WeeklyDataDisclaimer className="mt-6 max-w-2xl" />
 
         {/* Quick stats strip */}
         <div className="mt-10 grid grid-cols-2 gap-px border border-hairline bg-hairline sm:grid-cols-4">
@@ -150,7 +153,7 @@ export default function HomePage() {
             <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
               The research view. Quantify which story categories show the most
               partisan divergence, see how volume and polarization interact, and
-              read auto-generated findings — like {topGap.name} topping the gap
+              read auto-generated findings, such as {topGap.name} topping the gap
               ranking at a score of {topGap.divergenceScore}.
             </p>
             <span className="mt-5 font-mono text-xs uppercase tracking-widest text-highlight group-hover:underline">
