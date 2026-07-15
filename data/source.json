@@ -1,8 +1,8 @@
 {
   "mode": "live-newsdata",
-  "fetchedAt": "2026-07-06T19:08:35.647Z",
+  "fetchedAt": "2026-07-15T01:27:05.808Z",
   "weeks": 20,
-  "weeksCollected": 3,
+  "weeksCollected": 4,
   "provider": "NewsData.io (latest, 48h snapshots)",
   "biasSource": "AllSides / Ad Fontes Media / Media Bias Fact Check (3-org consensus)",
   "outletCount": 10
