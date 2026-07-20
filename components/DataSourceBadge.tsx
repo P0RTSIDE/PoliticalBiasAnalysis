@@ -11,7 +11,7 @@ const source = sourceData as DataSource;
  */
 export function DataSourceBadge({ className }: { className?: string }) {
   const isLive = source.mode.startsWith("live");
-  const label = isLive ? "Live data" : "Illustrative mock data";
+  const label = isLive ? "Live data" : "Sample data";
   const dot = isLive ? "bg-left-blindspot" : "bg-highlight";
 
   const fetched =
@@ -32,7 +32,7 @@ export function DataSourceBadge({ className }: { className?: string }) {
 
   const detail = isLive
     ? `${source.provider} · ${source.biasSource} · ${source.outletCount} outlets${collected}${fetched}`
-    : "Seeded illustrative data · run npm run fetch-data (GDELT) or npm run fetch-newsdata for live coverage";
+    : "Sample dataset for demonstration";
 
   return (
     <div
@@ -49,7 +49,7 @@ export function DataSourceBadge({ className }: { className?: string }) {
       <span className="hidden text-[11px] text-text-secondary/70 sm:inline">
         {isLive
           ? `${source.provider} · ${source.biasSource}${collected}`
-          : "run npm run fetch-newsdata for live coverage"}
+          : "Sample data"}
       </span>
     </div>
   );

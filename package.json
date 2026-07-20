@@ -2,7 +2,7 @@
   "name": "blindspot-tracker",
   "version": "1.0.0",
   "private": true,
-  "description": "A media analysis tool that visualizes how often news topics fall into political blindspots over time. Built to complement Ground News.",
+  "description": "Media analysis tool that visualizes political coverage blindspots over time and quantifies partisan coverage gaps by story category.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

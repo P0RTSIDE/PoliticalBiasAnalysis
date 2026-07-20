@@ -46,7 +46,7 @@ export function WeeklyDataDisclaimer({
               currently have real measurements.
             </>
           ) : (
-            <>Coverage charts elsewhere currently show illustrative data.</>
+            <>Coverage charts elsewhere use sample data for demonstration.</>
           )}{" "}
           <Link href="/about" className="text-highlight hover:underline">
             Methodology
@@ -68,10 +68,9 @@ export function WeeklyDataDisclaimer({
       >
         <p>
           <span className="font-medium text-text-primary">Data note:</span>{" "}
-          Charts on this page currently show illustrative placeholder data, not
-          live weekly measurements. When live data is enabled, coverage is
-          collected weekly and history builds one week at a time across a{" "}
-          {windowWeeks}-week window.{" "}
+          Charts on this page use sample data for layout demonstration. Live
+          deployments collect coverage weekly and build history one week at a
+          time across a {windowWeeks}-week window.{" "}
           <Link href="/about" className="text-highlight hover:underline">
             Read the methodology
           </Link>

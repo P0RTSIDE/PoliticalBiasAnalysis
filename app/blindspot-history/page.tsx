@@ -257,8 +257,8 @@ export default function BlindspotHistoryPage() {
             </p>
             <p className="font-mono text-[11px] uppercase tracking-wider text-text-secondary/70">
               {isLiveData
-                ? "Grid reflects real coverage counts. See the badge above for source and weeks collected."
-                : "Grid shows illustrative mock data. Run npm run fetch-newsdata for live coverage."}
+                ? "Grid reflects live coverage counts. See the badge above for source and weeks collected."
+                : "Grid shows sample data for layout demonstration."}
             </p>
           </div>
         )}

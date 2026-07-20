@@ -166,7 +166,7 @@ export default function AnalyzePage() {
               title={
                 result.analyzer === "llm"
                   ? `Analyzed by ${result.model}`
-                  : "No LLM configured: shallow keyword heuristic"
+                  : "Keyword-based analysis"
               }
             >
               <span
@@ -179,7 +179,7 @@ export default function AnalyzePage() {
               />
               {result.analyzer === "llm"
                 ? `LLM · ${result.model}`
-                : "Heuristic (no LLM)"}
+                : "Keyword fallback"}
             </span>
           </div>
 
@@ -259,10 +259,9 @@ export default function AnalyzePage() {
           </div>
 
           <p className="font-mono text-[11px] leading-relaxed text-text-secondary/70">
-            Article-level estimate for U.S. political context. The LLM rubric is
-            calibrated but not infallible; treat scores as an analytical signal,
-            not a verdict. Configure an LLM (see README) for the full assessment.
-            The heuristic fallback is a shallow keyword check only.
+            Article-level estimate for U.S. political context. Scores reflect
+            framing and emphasis in the submitted text; treat them as an
+            analytical signal, not a verdict on factual accuracy.
           </p>
         </section>
       )}
