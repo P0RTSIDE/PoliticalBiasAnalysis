@@ -2,8 +2,8 @@ import type { LeanLabel } from "@/lib/types";
 
 /**
  * Map an AllSides-style numeric lean (-6 … +6) to a categorical label.
- * Thresholds mirror the AllSides Media Bias Meter scale that Ground News
- * (and the three rating orgs it averages) use.
+ * Thresholds mirror the AllSides Media Bias Meter scale used by major
+ * media-bias rating organizations.
  */
 export function leanLabelFromScore(score: number): LeanLabel {
   if (score <= -3) return "Left";

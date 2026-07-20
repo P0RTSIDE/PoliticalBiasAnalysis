@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Curated outlet -> political-lean lookup used to group news coverage by side of the spectrum. Each outlet records the published placement of THREE independent media-monitoring organizations (the same trio Ground News averages), mapped to a common 5-point scale. `lean` is the consensus used by the pipeline.",
+    "description": "Curated outlet political-lean lookup. Each outlet records ratings from three independent media-monitoring organizations (AllSides, Ad Fontes Media, Media Bias Fact Check), mapped to a common 5-point scale. `lean` is the numeric consensus used by the pipeline.",
     "sources": [
       "AllSides Media Bias Ratings (https://www.allsides.com/media-bias/media-bias-ratings) — CC BY-NC 4.0",
       "Ad Fontes Media — Media Bias Chart (https://adfontesmedia.com)",
@@ -12,7 +12,7 @@
       "adFontes": "Ad Fontes Media bias score bucketed to the 5-point scale (skews -> lean, strong/hyper -> full).",
       "mbfc": "Media Bias/Fact Check rating mapped (Left-Center -> lean-left, Least Biased -> center, Right-Center -> lean-right)."
     },
-    "consensus": "`lean` = the rounded average of allSides/adFontes/mbfc on a numeric scale (left=-2, lean-left=-1, center=0, lean-right=+1, right=+2). This mirrors Ground News' practice of blending three independent ratings rather than trusting any single source.",
+    "consensus": "`lean` = the rounded average of allSides/adFontes/mbfc on a numeric scale (left=-2, lean-left=-1, center=0, lean-right=+1, right=+2).",
     "note": "Ratings reflect each organization's online written-news placement at time of compilation and are approximate. At fetch time the consensus lean is grouped (left = left|lean-left, right = right|lean-right, center tracked separately)."
   },
   "outlets": [

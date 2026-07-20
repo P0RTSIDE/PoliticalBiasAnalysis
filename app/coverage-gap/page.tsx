@@ -207,8 +207,8 @@ export default function CoverageGapPage() {
             </p>
             <p className="font-mono text-[11px] uppercase tracking-wider text-text-secondary/70">
               {isLiveData
-                ? "Figures here are real coverage counts. See the badge above for the data source and how many weeks have been collected."
-                : "All figures here are illustrative mock data. Run npm run fetch-newsdata to replace with live coverage."}
+                ? "Figures reflect live coverage counts. See the badge above for the data source and weeks collected."
+                : "Figures show sample data for layout demonstration."}
             </p>
           </div>
         )}

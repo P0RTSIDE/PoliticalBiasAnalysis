@@ -252,8 +252,8 @@ export default function AboutPage() {
         <p>
           The charts on this site are built from precomputed JSON files, not
           live queries at page load. A badge on the data pages states whether
-          you are viewing live coverage figures or illustrative placeholder
-          data, along with how many weeks of real measurements are included and
+          you are viewing live coverage figures or sample data for
+          demonstration, along with how many weeks of real measurements are included and
           when the figures were last updated.
         </p>
 
@@ -288,12 +288,12 @@ export default function AboutPage() {
           depends on network access to GDELT&apos;s public endpoint.
         </p>
 
-        <p className="font-medium text-text-primary">Illustrative data</p>
+        <p className="font-medium text-text-primary">Sample data</p>
         <p>
-          If no live snapshot has been loaded, the site may ship with seeded
+          If no live snapshot has been loaded, the site may ship with sample
           figures designed to demonstrate layout and typical blindspot patterns.
-          The badge labels this clearly. Illustrative data should not be cited
-          as empirical findings.
+          The badge labels this clearly. Sample data should not be cited as
+          empirical findings.
         </p>
 
         <div className="border-l-2 border-highlight bg-surface p-4">

@@ -12,7 +12,7 @@ export function Footer() {
           <p className="text-xs text-text-secondary">
             {isLiveData
               ? "Showing live coverage data. History builds week by week; see the "
-              : "Data is illustrative and for demonstration only. See the "}
+              : "Data is sample data for layout demonstration. See the "}
             <Link href="/about" className="text-highlight hover:underline">
               methodology
             </Link>

@@ -131,8 +131,8 @@ export function analyzeHeuristic(
     confidence: total + framing.hits === 0 ? 0.15 : 0.35,
     summary:
       total === 0 && framing.hits === 0
-        ? "No strongly partisan vocabulary detected by the keyword heuristic. This is a shallow lexical check. Configure an LLM for a real article-level assessment."
-        : `Keyword heuristic found ${left.hits} left-coded and ${right.hits} right-coded term(s), plus ${framing.hits} loaded framing verb(s). This is a shallow lexical signal only. Configure an LLM for a calibrated, explained assessment.`,
+        ? "No strongly partisan vocabulary detected in this text using the keyword fallback."
+        : `Keyword fallback found ${left.hits} left-coded and ${right.hits} right-coded term(s), plus ${framing.hits} loaded framing verb(s).`,
     dimensions: [
       { name: "Word choice", score: lexScore, note: `${total} loaded term(s) detected.` },
       { name: "Source selection", score: 0, note: "Not assessed by the heuristic." },
