@@ -218,6 +218,68 @@
         "right": 2,
         "center": 0
       }
+    },
+    "2026-W35": {
+      "Immigration": {
+        "left": 22,
+        "right": 43,
+        "center": 0
+      },
+      "Climate": {
+        "left": 11,
+        "right": 1,
+        "center": 0
+      },
+      "Gun Control": {
+        "left": 0,
+        "right": 0,
+        "center": 0
+      },
+      "Healthcare": {
+        "left": 2,
+        "right": 5,
+        "center": 0
+      },
+      "Foreign Policy": {
+        "left": 5,
+        "right": 12,
+        "center": 0
+      },
+      "Economy": {
+        "left": 33,
+        "right": 41,
+        "center": 0
+      },
+      "Education": {
+        "left": 18,
+        "right": 28,
+        "center": 0
+      },
+      "Crime": {
+        "left": 1,
+        "right": 3,
+        "center": 0
+      },
+      "Science": {
+        "left": 1,
+        "right": 0,
+        "center": 0
+      },
+      "Local Politics": {
+        "left": 0,
+        "right": 7,
+        "center": 0
+      },
+      "International": {
+        "left": 1,
+        "right": 3,
+        "center": 0
+      },
+      "Religion": {
+        "left": 4,
+        "right": 6,
+        "center": 0
+      }
     }
   }
 }
