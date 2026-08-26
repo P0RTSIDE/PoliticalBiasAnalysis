@@ -25,6 +25,9 @@ interface HoverState {
   y: number;
 }
 
+const LABEL_COL = "5.5rem";
+const CELL_SIZE = "1.125rem";
+
 export function BlindspotHeatmap({
   history,
   topics,
@@ -44,19 +47,19 @@ export function BlindspotHeatmap({
   return (
     <div className="relative">
       <div className="overflow-x-auto pb-2">
-        <div className="min-w-[640px]">
+        <div className="w-fit">
           {/* Column headers (week labels) */}
           <div
-            className="grid items-end gap-1 pb-2"
+            className="grid items-end gap-0.5 pb-1.5"
             style={{
-              gridTemplateColumns: `7rem repeat(${weeks.length}, minmax(0, 1fr))`,
+              gridTemplateColumns: `${LABEL_COL} repeat(${weeks.length}, ${CELL_SIZE})`,
             }}
           >
             <div />
             {weeks.map((week) => (
               <div
                 key={week}
-                className="text-center font-mono text-[10px] text-text-secondary"
+                className="text-center font-mono text-[9px] text-text-secondary"
               >
                 {weekNumber(week)}
               </div>
@@ -69,12 +72,12 @@ export function BlindspotHeatmap({
             return (
               <div
                 key={topic}
-                className="grid items-center gap-1 py-0.5"
+                className="grid items-center gap-0.5 py-px"
                 style={{
-                  gridTemplateColumns: `7rem repeat(${weeks.length}, minmax(0, 1fr))`,
+                  gridTemplateColumns: `${LABEL_COL} repeat(${weeks.length}, ${CELL_SIZE})`,
                 }}
               >
-                <div className="truncate pr-3 text-right text-xs text-text-secondary">
+                <div className="truncate pr-2 text-right text-[11px] leading-tight text-text-secondary">
                   {topic}
                 </div>
                 {weeks.map((week, colIdx) => {
@@ -118,10 +121,10 @@ export function BlindspotHeatmap({
                       }}
                       onBlur={() => setHover(null)}
                       className={cn(
-                        "group relative aspect-square w-full animate-cell-in transition-transform duration-150",
+                        "group relative h-[1.125rem] w-[1.125rem] animate-cell-in transition-transform duration-150",
                         isAbsent
                           ? "cursor-default border border-dashed border-hairline/60"
-                          : "cursor-pointer hover:z-10 hover:scale-125 hover:ring-1 hover:ring-white/40"
+                          : "cursor-pointer hover:z-10 hover:scale-150 hover:ring-1 hover:ring-white/40"
                       )}
                       style={{
                         backgroundColor: isAbsent ? "transparent" : color,
@@ -137,7 +140,7 @@ export function BlindspotHeatmap({
       </div>
 
       {/* Legend */}
-      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-hairline pt-4">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-hairline pt-3">
         {(
           [
             "right-blindspot",
