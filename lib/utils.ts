@@ -1,9 +1,11 @@
 import sourceData from "@/data/source.json";
+import snapshotsStore from "@/data/snapshots.json";
 import type {
   BlindspotHistory,
   BlindspotState,
   ChronicBlindspot,
   CoverageCategory,
+  CoverageGaps,
   DataSource,
   HeadlineExample,
   TopicSeries,
@@ -14,6 +16,61 @@ export const dataSource = sourceData as DataSource;
 
 /** True when the loaded data is real coverage (any "live-*" mode). */
 export const isLiveData = dataSource.mode.startsWith("live");
+
+type SnapshotsFile = { snapshots?: Record<string, unknown> };
+
+/**
+ * ISO weeks that have a collected coverage snapshot. Charts and stats use only
+ * these weeks so the UI does not show empty columns for unmeasured periods.
+ */
+export function getTrackedWeeks(history: BlindspotHistory): string[] {
+  if (isLiveData && dataSource.mode === "live-newsdata") {
+    const snaps = (snapshotsStore as SnapshotsFile).snapshots ?? {};
+    const fromSnaps = Object.keys(snaps)
+      .filter((w) => history.weeks.includes(w))
+      .sort((a, b) => weekNumber(a) - weekNumber(b));
+    if (fromSnaps.length) return fromSnaps;
+  }
+
+  if (!isLiveData) return history.weeks;
+
+  if (
+    typeof dataSource.weeksCollected === "number" &&
+    dataSource.weeksCollected >= history.weeks.length
+  ) {
+    return history.weeks;
+  }
+
+  return history.weeks.filter((w) =>
+    Object.values(history.topics).some((series) => {
+      const state = series[w];
+      return state && state !== "absent";
+    })
+  );
+}
+
+/** Number of weeks with collected coverage measurements. */
+export function trackedWeekCount(history: BlindspotHistory): number {
+  return getTrackedWeeks(history).length;
+}
+
+/** Slice coverage-gap weekly trends down to tracked weeks only. */
+export function filterCoverageGapsToTrackedWeeks(
+  gaps: CoverageGaps,
+  trackedWeeks: string[]
+): CoverageGaps {
+  const indices = gaps.weeks
+    .map((w, i) => ({ w, i }))
+    .filter(({ w }) => trackedWeeks.includes(w));
+
+  return {
+    weeks: indices.map(({ w }) => w),
+    categories: gaps.categories.map((c) => ({
+      ...c,
+      weeklyTrend: indices.map(({ i }) => c.weeklyTrend[i] ?? 0),
+    })),
+  };
+}
 
 /** Color tokens keyed by blindspot state. Mirrors the Tailwind palette. */
 export const STATE_COLORS: Record<BlindspotState, string> = {

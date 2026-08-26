@@ -2,15 +2,21 @@
 
 import { cn } from "@/lib/utils";
 
-export const TIME_RANGES = [8, 16, 20] as const;
-export type TimeRange = (typeof TIME_RANGES)[number];
+export type TimeRange = number;
 
 interface TimeRangeToggleProps {
   value: TimeRange;
+  options: number[];
   onChange: (next: TimeRange) => void;
 }
 
-export function TimeRangeToggle({ value, onChange }: TimeRangeToggleProps) {
+export function TimeRangeToggle({
+  value,
+  options,
+  onChange,
+}: TimeRangeToggleProps) {
+  if (options.length <= 1) return null;
+
   return (
     <div className="space-y-2">
       <span className="block font-mono text-[11px] uppercase tracking-widest text-text-secondary">
@@ -21,7 +27,7 @@ export function TimeRangeToggle({ value, onChange }: TimeRangeToggleProps) {
         aria-label="Select time range"
         className="inline-flex border border-hairline bg-surface"
       >
-        {TIME_RANGES.map((range, i) => {
+        {options.map((range, i) => {
           const active = value === range;
           return (
             <button
@@ -45,4 +51,11 @@ export function TimeRangeToggle({ value, onChange }: TimeRangeToggleProps) {
       </div>
     </div>
   );
+}
+
+export function buildTimeRangeOptions(trackedWeekCount: number): number[] {
+  if (trackedWeekCount <= 1) return [trackedWeekCount];
+  if (trackedWeekCount <= 8) return [trackedWeekCount];
+  if (trackedWeekCount <= 16) return [8, trackedWeekCount];
+  return [8, 16, trackedWeekCount];
 }

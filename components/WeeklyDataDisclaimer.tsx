@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { cn, dataSource, isLiveData } from "@/lib/utils";
+import { cn, dataSource, isLiveData, trackedWeekCount } from "@/lib/utils";
+import historyData from "@/data/blindspot-history.json";
+import type { BlindspotHistory } from "@/lib/types";
+
+const history = historyData as BlindspotHistory;
 
 type WeeklyDataDisclaimerProps = {
   className?: string;
@@ -11,11 +15,7 @@ export function WeeklyDataDisclaimer({
   className,
   scope = "coverage",
 }: WeeklyDataDisclaimerProps) {
-  const windowWeeks = dataSource.weeks;
-  const collected =
-    typeof dataSource.weeksCollected === "number"
-      ? dataSource.weeksCollected
-      : 0;
+  const tracked = trackedWeekCount(history);
   const fetched = dataSource.fetchedAt
     ? new Date(dataSource.fetchedAt).toLocaleDateString("en-US", {
         year: "numeric",
@@ -39,11 +39,11 @@ export function WeeklyDataDisclaimer({
           dataset.{" "}
           {isLiveData ? (
             <>
-              Coverage charts on other pages are updated weekly;{" "}
+              Coverage charts on other pages show{" "}
               <span className="font-medium text-text-primary">
-                {collected} of {windowWeeks} weeks
+                {tracked} tracked week{tracked === 1 ? "" : "s"}
               </span>{" "}
-              currently have real measurements.
+              of live measurements.
             </>
           ) : (
             <>Coverage charts elsewhere use sample data for demonstration.</>
@@ -68,9 +68,7 @@ export function WeeklyDataDisclaimer({
       >
         <p>
           <span className="font-medium text-text-primary">Data note:</span>{" "}
-          Charts on this page use sample data for layout demonstration. Live
-          deployments collect coverage weekly and build history one week at a
-          time across a {windowWeeks}-week window.{" "}
+          Charts on this page use sample data for layout demonstration.{" "}
           <Link href="/about" className="text-highlight hover:underline">
             Read the methodology
           </Link>
@@ -90,13 +88,11 @@ export function WeeklyDataDisclaimer({
     >
       <p>
         <span className="font-medium text-text-primary">Data note:</span>{" "}
-        Coverage figures are collected weekly (one snapshot per update). Only{" "}
+        Coverage is collected weekly. Charts show{" "}
         <span className="font-medium text-text-primary">
-          {collected} of {windowWeeks} weeks
+          {tracked} tracked week{tracked === 1 ? "" : "s"}
         </span>{" "}
-        currently have real measurements. The charts still show the full{" "}
-        {windowWeeks}-week window; weeks without a snapshot appear empty
-        rather than estimated.
+        with real measurements. New weeks appear as snapshots are added.
         {fetched ? <> Last updated {fetched}.</> : null}{" "}
         <Link href="/about" className="text-highlight hover:underline">
           Read the methodology

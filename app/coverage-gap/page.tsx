@@ -190,12 +190,11 @@ export default function CoverageGapPage() {
             </p>
             <p>
               <span className="font-medium text-text-primary">
-                Partial history
+                Tracked weeks
               </span>{" "}
-              Category totals and divergence scores aggregate every week that
-              has a live snapshot. Weeks without data contribute zero volume
-              and appear as flat segments in the weekly trend. Rankings and
-              auto-generated findings can shift as more weeks are collected.
+              Category totals and divergence scores aggregate across tracked
+              weeks only. The weekly trend reflects each week that has a
+              collected snapshot.
             </p>
             <p>
               Live data comes from article-volume counts (GDELT or NewsData.io)
