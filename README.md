@@ -73,6 +73,12 @@ npm run gen-data                # Regenerate sample data for offline demo
 
 The live site uses NewsData.io snapshots collected week by week. The heatmap shows a 20-week window; weeks without a snapshot appear empty rather than estimated.
 
+### Automated weekly updates
+
+A GitHub Actions workflow (`.github/workflows/weekly-newsdata.yml`) runs every Monday, fetches a new NewsData snapshot, commits updated `data/*.json`, and pushes to `main`. Vercel redeploys automatically on push.
+
+**One-time setup:** In your GitHub repo, go to Settings → Secrets and variables → Actions, and add `NEWSDATA_API_KEY` with your NewsData.io key. You can also trigger the workflow manually from the Actions tab.
+
 ---
 
 ## Project structure
