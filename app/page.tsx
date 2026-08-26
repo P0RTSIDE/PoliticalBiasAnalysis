@@ -2,14 +2,15 @@ import Link from "next/link";
 import historyData from "@/data/blindspot-history.json";
 import gapsData from "@/data/coverage-gaps.json";
 import type { BlindspotHistory, CoverageGaps } from "@/lib/types";
-import { computeChronicBlindspots, formatNumber } from "@/lib/utils";
+import { computeChronicBlindspots, formatNumber, getTrackedWeeks } from "@/lib/utils";
 import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 const history = historyData as BlindspotHistory;
 const gaps = gapsData as CoverageGaps;
+const TRACKED_WEEKS = getTrackedWeeks(history);
 
 function getHeroStat() {
-  const chronic = computeChronicBlindspots(history, history.weeks);
+  const chronic = computeChronicBlindspots(history, TRACKED_WEEKS);
   // Pick the topic with the highest single-side blindspot count.
   let best = chronic[0];
   let bestSideCount = 0;
@@ -19,7 +20,7 @@ function getHeroStat() {
     const series = history.topics[c.topic];
     let right = 0;
     let left = 0;
-    for (const w of history.weeks) {
+    for (const w of TRACKED_WEEKS) {
       if (series[w] === "right-blindspot") right += 1;
       if (series[w] === "left-blindspot") left += 1;
     }
@@ -39,7 +40,7 @@ function getHeroStat() {
     topic: best.topic,
     side: bestSide,
     count: bestSideCount,
-    total: history.weeks.length,
+    total: TRACKED_WEEKS.length,
   };
 }
 
@@ -63,8 +64,8 @@ export default function HomePage() {
         <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.1] text-text-primary sm:text-6xl">
           {hero.topic} has been a{" "}
           <span style={{ color: sideColor }}>{sideWord} blindspot</span>{" "}
-          <span className="font-mono">{hero.count}</span> of the last{" "}
-          <span className="font-mono">{hero.total}</span> weeks.
+          <span className="font-mono">{hero.count}</span> of{" "}
+          <span className="font-mono">{hero.total}</span> tracked weeks.
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-text-secondary">
           A media-analysis tool that tracks how often news topics fall into
@@ -78,7 +79,7 @@ export default function HomePage() {
         <div className="mt-10 grid grid-cols-2 gap-px border border-hairline bg-hairline sm:grid-cols-4">
           {[
             { label: "Topics tracked", value: Object.keys(history.topics).length },
-            { label: "Weeks of history", value: history.weeks.length },
+            { label: "Weeks tracked", value: TRACKED_WEEKS.length },
             { label: "Categories studied", value: gaps.categories.length },
             { label: "Stories analyzed", value: formatNumber(totalStories) },
           ].map((stat) => (

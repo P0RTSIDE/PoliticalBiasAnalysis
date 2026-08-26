@@ -71,7 +71,7 @@ npm run fetch-data              # GDELT backfill (20-week window)
 npm run gen-data                # Regenerate sample data for offline demo
 ```
 
-The live site uses NewsData.io snapshots collected week by week. The heatmap shows a 20-week window; weeks without a snapshot appear empty rather than estimated.
+The live site uses NewsData.io snapshots collected week by week. Charts show tracked weeks only.
 
 ### Automated weekly updates
 

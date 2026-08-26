@@ -271,8 +271,8 @@ export default function AboutPage() {
           </a>
           , which reports how many articles matching a topic appeared at
           selected outlet domains within a recent window. Historical depth
-          builds as new weekly snapshots are added; weeks without a snapshot
-          appear empty on the heatmap rather than as fabricated values.
+          builds as new weekly snapshots are added. Charts list only tracked
+          weeks rather than empty columns for unmeasured periods.
         </p>
         <p>
           An alternate pipeline can draw from the{" "}
@@ -314,51 +314,40 @@ export default function AboutPage() {
 
       <div className="h-px bg-hairline" />
 
-      <Section title="Why not all 20 weeks show data">
+      <Section title="How weekly tracking works">
         <p>
-          The charts always use a fixed 20 week window so layout and comparisons
-          stay consistent. That does not mean 20 weeks of measurements exist
-          yet. With the current NewsData.io pipeline, each update captures only
-          the last 48 hours of articles and saves one weekly snapshot. History
-          grows forward as new snapshots are added, typically one week per run.
-          The free tier does not expose a historical archive, so past weeks
-          cannot be backfilled automatically.
+          Coverage is collected one week at a time. Each update captures recent
+          article volume at selected outlet domains and saves a weekly snapshot.
+          The charts show only those tracked weeks, not a fixed calendar window
+          with empty columns for unmeasured periods.
         </p>
         <p>
-          Weeks without a snapshot appear on the heatmap as{" "}
-          <span className="font-medium text-text-primary">
-            not in top stories
-          </span>{" "}
-          (empty or dashed cells). The site does not invent values for those
-          weeks. The data badge on each page shows how many real weeks have been
-          collected so far.
+          With the current NewsData.io pipeline, each run measures the last 48
+          hours of news. History grows forward as new snapshots are added,
+          typically one week per update. The free tier does not expose a
+          historical archive, so past weeks that were never measured cannot be
+          reconstructed later.
         </p>
         <p className="font-medium text-text-primary">
-          How partial history affects each view
+          How this appears on each view
         </p>
         <ul className="list-inside list-disc space-y-2 pl-1">
           <li>
             <span className="font-medium text-text-primary">
               Blindspot History
             </span>
-            : most cells stay empty until enough weekly snapshots exist. Chronic
-            blindspot percentages count only weeks where a topic actually had
-            measurable coverage, but the grid still spans the full 20 week
-            range.
+            : one column per tracked week. Chronic blindspot percentages count
+            only weeks where a topic had measurable coverage.
           </li>
           <li>
             <span className="font-medium text-text-primary">
               Coverage Gap Study
             </span>
-            : category totals, divergence scores, and auto-generated findings
-            aggregate across collected weeks only. Weeks without data add zero
-            volume and show as flat lines in the weekly trend.
+            : category totals and findings aggregate across tracked weeks only.
           </li>
           <li>
             <span className="font-medium text-text-primary">Home page</span>:
-            headline stats use the same 20 week window. Blindspot counts include
-            only weeks classified as blindspots, not empty weeks. Story totals
-            reflect volume from collected snapshots so far.
+            headline stats and week counts refer to tracked weeks only.
           </li>
           <li>
             <span className="font-medium text-text-primary">
@@ -369,10 +358,9 @@ export default function AboutPage() {
           </li>
         </ul>
         <p>
-          An alternate GDELT pipeline can backfill multiple weeks in one run
-          when the API is reachable, but it is rate limited and unreliable from
-          many networks. Running the NewsData fetch regularly is the practical
-          way to deepen history on the live site.
+          A GitHub Actions workflow can refresh data automatically each week.
+          An alternate GDELT pipeline can backfill multiple weeks in one run when
+          the API is reachable.
         </p>
       </Section>
 
@@ -413,8 +401,7 @@ export default function AboutPage() {
           </li>
           <li>
             Longitudinal depth under NewsData depends on how many weekly
-            snapshots exist; sparse columns are an honest record of missing
-            data, not a bug.
+            snapshots exist. The site lists tracked weeks only.
           </li>
         </ul>
       </Section>

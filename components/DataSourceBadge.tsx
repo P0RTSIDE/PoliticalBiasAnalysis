@@ -25,9 +25,9 @@ export function DataSourceBadge({ className }: { className?: string }) {
 
   const collected =
     isLive && typeof source.weeksCollected === "number"
-      ? ` · ${source.weeksCollected} real week${
+      ? ` · ${source.weeksCollected} week${
           source.weeksCollected === 1 ? "" : "s"
-        } collected`
+        } tracked`
       : "";
 
   const detail = isLive

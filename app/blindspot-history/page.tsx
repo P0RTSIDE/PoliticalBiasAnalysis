@@ -6,6 +6,7 @@ import type { BlindspotHistory } from "@/lib/types";
 import {
   STATE_COLORS,
   computeChronicBlindspots,
+  getTrackedWeeks,
   isLiveData,
   sliceRecentWeeks,
 } from "@/lib/utils";
@@ -13,7 +14,7 @@ import { BlindspotHeatmap } from "@/components/BlindspotHeatmap";
 import { TopicSelector } from "@/components/TopicSelector";
 import {
   TimeRangeToggle,
-  type TimeRange,
+  buildTimeRangeOptions,
 } from "@/components/TimeRangeToggle";
 import {
   SidePanelDrawer,
@@ -24,15 +25,17 @@ import { WeeklyDataDisclaimer } from "@/components/WeeklyDataDisclaimer";
 
 const history = historyData as BlindspotHistory;
 const ALL_TOPICS = Object.keys(history.topics);
+const TRACKED_WEEKS = getTrackedWeeks(history);
+const TIME_RANGE_OPTIONS = buildTimeRangeOptions(TRACKED_WEEKS.length);
 
 export default function BlindspotHistoryPage() {
   const [selectedTopics, setSelectedTopics] = useState<string[]>(ALL_TOPICS);
-  const [range, setRange] = useState<TimeRange>(20);
+  const [range, setRange] = useState(TIME_RANGE_OPTIONS.at(-1)!);
   const [selection, setSelection] = useState<DrawerSelection | null>(null);
   const [methodologyOpen, setMethodologyOpen] = useState(false);
 
   const weeks = useMemo(
-    () => sliceRecentWeeks(history.weeks, range),
+    () => sliceRecentWeeks(TRACKED_WEEKS, range),
     [range]
   );
 
@@ -82,7 +85,11 @@ export default function BlindspotHistoryPage() {
             onChange={setSelectedTopics}
           />
         </div>
-        <TimeRangeToggle value={range} onChange={setRange} />
+        <TimeRangeToggle
+          value={range}
+          options={TIME_RANGE_OPTIONS}
+          onChange={setRange}
+        />
       </div>
 
       {/* Heatmap */}
@@ -224,8 +231,8 @@ export default function BlindspotHistoryPage() {
                   <span className="font-medium text-text-primary">
                     Not in top stories
                   </span>
-                  : weekly volume below 25% of the topic&apos;s median, or no
-                  snapshot was collected for that week.
+                  : weekly volume below 25% of the topic&apos;s median for that
+                  tracked week.
                 </span>
               </li>
             </ul>
@@ -235,18 +242,15 @@ export default function BlindspotHistoryPage() {
               </span>{" "}
               (in the ranked list below) is the share of in-coverage weeks that
               were any kind of one-sided blindspot. Weeks where the topic
-              wasn&apos;t in the news at all, or where no live snapshot exists
-              yet, are excluded so sparse topics aren&apos;t unfairly diluted.
+              wasn&apos;t in the news during a tracked week are excluded so
+              sparse topics aren&apos;t unfairly diluted.
             </p>
             <p>
               <span className="font-medium text-text-primary">
-                Partial history
+                Tracked weeks only
               </span>{" "}
-              The grid always shows a 20 week window, but live data fills in one
-              week at a time. Until enough weekly snapshots are collected, most
-              cells stay empty. Rankings and percentages reflect only the weeks
-              that actually have measurements, so early results can shift as
-              more history accumulates.
+              The grid shows only weeks with collected coverage snapshots. New
+              weeks are added as data is refreshed each week.
             </p>
             <p>
               See the{" "}
