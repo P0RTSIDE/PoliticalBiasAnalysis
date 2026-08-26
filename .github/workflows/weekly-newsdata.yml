@@ -1,0 +1,39 @@
+name: Weekly NewsData update
+
+on:
+  schedule:
+    # Mondays at 14:00 UTC
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch NewsData snapshot
+        env:
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+        run: node scripts/fetch-newsdata.mjs --delay 2000
+
+      - name: Commit and push data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/blindspot-history.json data/coverage-gaps.json data/snapshots.json data/source.json data/newsdata-domains.json
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+            exit 0
+          fi
+          git commit -m "Refresh live coverage data (automated weekly NewsData snapshot)."
+          git push
