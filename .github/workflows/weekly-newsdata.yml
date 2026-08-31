@@ -34,8 +34,8 @@ jobs:
             echo "::error::Secret looks like a full env line. Paste only the key value (pub_...), not NEWSDATA_API_KEY=..."
             exit 1
           fi
-          if [[ ! "$NEWSDATA_API_KEY" =~ ^pub_ ]]; then
-            echo "::error::Key should start with pub_. Copy the API key from newsdata.io/dashboard and update the GitHub secret."
+          if [[ "$NEWSDATA_API_KEY" =~ ^[[:space:]] || "$NEWSDATA_API_KEY" =~ [[:space:]]$ ]]; then
+            echo "::error::Secret has leading or trailing spaces. Re-save it with no spaces before or after the key."
             exit 1
           fi
 

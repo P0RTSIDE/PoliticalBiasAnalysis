@@ -118,7 +118,7 @@ function loadEnv() {
   }
 }
 loadEnv();
-const API_KEY = process.env.NEWSDATA_API_KEY || "";
+const API_KEY = (process.env.NEWSDATA_API_KEY || "").trim();
 
 // ---------------------------------------------------------------------------
 // Domain resolution cache. NewsData validates `domainurl` against its own
