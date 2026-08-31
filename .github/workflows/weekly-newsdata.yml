@@ -14,12 +14,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
+          package-manager-cache: false
+
+      - name: Validate NewsData secret
+        env:
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+        run: |
+          if [ -z "$NEWSDATA_API_KEY" ]; then
+            echo "::error::NEWSDATA_API_KEY is missing. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          if [[ "$NEWSDATA_API_KEY" == *"="* ]]; then
+            echo "::error::Secret looks like a full env line. Paste only the key value (pub_...), not NEWSDATA_API_KEY=..."
+            exit 1
+          fi
+          if [[ ! "$NEWSDATA_API_KEY" =~ ^pub_ ]]; then
+            echo "::error::Key should start with pub_. Copy the API key from newsdata.io/dashboard and update the GitHub secret."
+            exit 1
+          fi
 
       - name: Fetch NewsData snapshot
         env:
