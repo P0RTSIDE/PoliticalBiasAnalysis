@@ -1,6 +1,5 @@
 {
   "weeks": [
-    "2026-W17",
     "2026-W18",
     "2026-W19",
     "2026-W20",
@@ -19,17 +18,17 @@
     "2026-W33",
     "2026-W34",
     "2026-W35",
-    "2026-W36"
+    "2026-W36",
+    "2026-W37"
   ],
   "categories": [
     {
       "name": "Immigration",
       "leftCoverage": 34,
       "rightCoverage": 66,
-      "totalVolume": 321,
+      "totalVolume": 344,
       "divergenceScore": 32,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -48,17 +47,17 @@
         0,
         0,
         32,
-        9
+        9,
+        30
       ]
     },
     {
       "name": "Climate",
-      "leftCoverage": 69,
-      "rightCoverage": 31,
-      "totalVolume": 52,
-      "divergenceScore": 38,
+      "leftCoverage": 71,
+      "rightCoverage": 29,
+      "totalVolume": 58,
+      "divergenceScore": 42,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -77,7 +76,8 @@
         0,
         0,
         83,
-        60
+        60,
+        67
       ]
     },
     {
@@ -96,7 +96,6 @@
         0,
         0,
         0,
-        0,
         100,
         100,
         33,
@@ -106,17 +105,17 @@
         0,
         0,
         100,
+        100,
         100
       ]
     },
     {
       "name": "Healthcare",
-      "leftCoverage": 22,
-      "rightCoverage": 78,
-      "totalVolume": 51,
-      "divergenceScore": 56,
+      "leftCoverage": 21,
+      "rightCoverage": 79,
+      "totalVolume": 52,
+      "divergenceScore": 58,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -135,17 +134,17 @@
         0,
         0,
         43,
-        0
+        0,
+        100
       ]
     },
     {
       "name": "Foreign Policy",
       "leftCoverage": 25,
       "rightCoverage": 75,
-      "totalVolume": 93,
+      "totalVolume": 99,
       "divergenceScore": 50,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -164,17 +163,17 @@
         0,
         0,
         41,
-        20
+        20,
+        33
       ]
     },
     {
       "name": "Economy",
       "leftCoverage": 39,
       "rightCoverage": 61,
-      "totalVolume": 270,
+      "totalVolume": 294,
       "divergenceScore": 22,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -193,17 +192,17 @@
         0,
         0,
         11,
+        17,
         17
       ]
     },
     {
       "name": "Education",
-      "leftCoverage": 40,
-      "rightCoverage": 60,
-      "totalVolume": 167,
-      "divergenceScore": 20,
+      "leftCoverage": 39,
+      "rightCoverage": 61,
+      "totalVolume": 187,
+      "divergenceScore": 22,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -222,15 +221,16 @@
         0,
         0,
         22,
-        10
+        10,
+        40
       ]
     },
     {
       "name": "Crime",
-      "leftCoverage": 25,
-      "rightCoverage": 75,
-      "totalVolume": 12,
-      "divergenceScore": 50,
+      "leftCoverage": 23,
+      "rightCoverage": 77,
+      "totalVolume": 13,
+      "divergenceScore": 54,
       "weeklyTrend": [
         0,
         0,
@@ -240,7 +240,6 @@
         0,
         0,
         0,
-        0,
         100,
         0,
         100,
@@ -251,15 +250,16 @@
         0,
         0,
         50,
+        100,
         100
       ]
     },
     {
       "name": "Science",
-      "leftCoverage": 83,
-      "rightCoverage": 17,
-      "totalVolume": 6,
-      "divergenceScore": 66,
+      "leftCoverage": 71,
+      "rightCoverage": 29,
+      "totalVolume": 7,
+      "divergenceScore": 42,
       "weeklyTrend": [
         0,
         0,
@@ -271,7 +271,6 @@
         0,
         0,
         0,
-        0,
         100,
         100,
         0,
@@ -279,18 +278,18 @@
         0,
         0,
         0,
+        100,
         100,
         100
       ]
     },
     {
       "name": "Local Politics",
-      "leftCoverage": 8,
-      "rightCoverage": 92,
-      "totalVolume": 40,
-      "divergenceScore": 84,
+      "leftCoverage": 14,
+      "rightCoverage": 86,
+      "totalVolume": 43,
+      "divergenceScore": 72,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -309,17 +308,17 @@
         0,
         0,
         100,
-        64
+        64,
+        100
       ]
     },
     {
       "name": "International",
-      "leftCoverage": 44,
-      "rightCoverage": 56,
-      "totalVolume": 27,
-      "divergenceScore": 12,
+      "leftCoverage": 52,
+      "rightCoverage": 48,
+      "totalVolume": 31,
+      "divergenceScore": 4,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -338,17 +337,17 @@
         0,
         0,
         50,
-        43
+        43,
+        100
       ]
     },
     {
       "name": "Religion",
-      "leftCoverage": 45,
-      "rightCoverage": 55,
-      "totalVolume": 44,
-      "divergenceScore": 10,
+      "leftCoverage": 46,
+      "rightCoverage": 54,
+      "totalVolume": 48,
+      "divergenceScore": 8,
       "weeklyTrend": [
-        0,
         0,
         0,
         0,
@@ -367,6 +366,7 @@
         0,
         0,
         20,
+        0,
         0
       ]
     }
