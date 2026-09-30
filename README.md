@@ -2,7 +2,7 @@
 
 A media analysis web app that tracks **coverage asymmetry over time**: which news topics receive uneven attention across the political spectrum, week by week.
 
-**Deploy:** Vercel (auto-deploy from `main`)
+Live site: [political-bias-analysis.vercel.app](https://political-bias-analysis.vercel.app/analyze). Production deploys from `main` on Vercel.
 
 ---
 
@@ -34,7 +34,7 @@ The app offers three views:
 ## Architecture
 
 ```
-scripts/          ETL pipelines → write data/*.json
+scripts/          ETL pipelines that write data/*.json
 data/             Weekly coverage snapshots + provenance (source.json)
 lib/              Types, scoring utilities, outlet bias ratings, analysis rubric
 app/              Pages + /api/analyze server route
@@ -75,9 +75,7 @@ The live site uses NewsData.io snapshots collected week by week. Charts show tra
 
 ### Automated weekly updates
 
-A GitHub Actions workflow (`.github/workflows/weekly-newsdata.yml`) runs every Monday, fetches a new NewsData snapshot, commits updated `data/*.json`, and pushes to `main`. Vercel redeploys automatically on push.
-
-**One-time setup:** In your GitHub repo, go to Settings → Secrets and variables → Actions, and add `NEWSDATA_API_KEY` with your NewsData.io key. You can also trigger the workflow manually from the Actions tab.
+A GitHub Actions workflow (`.github/workflows/weekly-newsdata.yml`) runs every Monday at 14:00 UTC, fetches a new NewsData snapshot, commits updated `data/*.json`, and pushes to `main`. Vercel redeploys on that push. The workflow reads `NEWSDATA_API_KEY` from the repository Actions secrets. It can also be started from the Actions tab.
 
 ---
 
@@ -98,7 +96,7 @@ components/
   ScatterPlot.tsx               Volume vs polarization
   DataSourceBadge.tsx           Live vs sample data indicator
 lib/
-  outlet-bias.json                Outlet → political lean lookup
+  outlet-bias.json              Outlet to political lean lookup
   analysis/                     LLM rubric, heuristic, URL extractor
 scripts/
   fetch-newsdata.mjs            NewsData.io ingestion
