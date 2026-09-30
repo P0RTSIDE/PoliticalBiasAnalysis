@@ -108,6 +108,60 @@ export function weekShortLabel(weekId: string): string {
   return `W${String(weekNumber(weekId)).padStart(2, "0")}`;
 }
 
+/** Parse an ISO week id like "2026-W40" into year and week number. */
+export function parseIsoWeekId(
+  weekId: string
+): { year: number; week: number } | null {
+  const match = weekId.match(/^(\d{4})-W(\d{2})$/);
+  if (!match) return null;
+  return { year: Number(match[1]), week: Number(match[2]) };
+}
+
+/**
+ * Calendar range for an ISO week (Monday through Sunday, UTC).
+ * Matches the ingestion pipeline's ISO week definition.
+ */
+export function isoWeekDateRange(
+  weekId: string
+): { start: Date; end: Date } | null {
+  const parsed = parseIsoWeekId(weekId);
+  if (!parsed) return null;
+
+  const { year: Y, week: W } = parsed;
+  const jan4 = new Date(Date.UTC(Y, 0, 4));
+  const day = jan4.getUTCDay() || 7;
+  const mondayWeek1 = new Date(jan4);
+  mondayWeek1.setUTCDate(jan4.getUTCDate() - (day - 1));
+  const start = new Date(mondayWeek1);
+  start.setUTCDate(mondayWeek1.getUTCDate() + (W - 1) * 7);
+  const end = new Date(start);
+  end.setUTCDate(start.getUTCDate() + 6);
+  return { start, end };
+}
+
+function formatUtcCalendarDate(d: Date, includeYear: boolean): string {
+  const opts: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  };
+  if (includeYear) opts.year = "numeric";
+  return d.toLocaleDateString("en-US", opts);
+}
+
+/** Human-readable period for a week id, e.g. "Sep 28 to Oct 4, 2026". */
+export function formatIsoWeekPeriod(weekId: string): string {
+  const range = isoWeekDateRange(weekId);
+  if (!range) return "";
+
+  const { start, end } = range;
+  const startYear = start.getUTCFullYear();
+  const endYear = end.getUTCFullYear();
+  const startLabel = formatUtcCalendarDate(start, startYear !== endYear);
+  const endLabel = formatUtcCalendarDate(end, true);
+  return `${startLabel} to ${endLabel}`;
+}
+
 /**
  * Return the last `count` weeks from a full week list, preserving order.
  */

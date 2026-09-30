@@ -6,6 +6,7 @@ import {
   STATE_COLORS,
   STATE_DESCRIPTIONS,
   STATE_LABELS,
+  formatIsoWeekPeriod,
   getHeadlineExamples,
   weekNumber,
 } from "@/lib/utils";
@@ -66,6 +67,9 @@ export function SidePanelDrawer({ selection, onClose }: SidePanelDrawerProps) {
                 Week {weekNumber(week)} · {week}
               </span>
             </div>
+            <p className="mt-1 font-mono text-[11px] text-text-secondary">
+              {formatIsoWeekPeriod(week)}
+            </p>
             <h2 className="mt-2 font-display text-2xl font-bold text-text-primary">
               {topic}
             </h2>

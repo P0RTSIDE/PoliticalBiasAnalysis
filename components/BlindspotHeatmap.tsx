@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { BlindspotHistory, BlindspotState } from "@/lib/types";
 import {
   STATE_COLORS,
   STATE_LABELS,
   cn,
+  formatIsoWeekPeriod,
   weekNumber,
 } from "@/lib/utils";
 import type { DrawerSelection } from "./SidePanelDrawer";
@@ -35,6 +36,16 @@ export function BlindspotHeatmap({
   onCellClick,
 }: BlindspotHeatmapProps) {
   const [hover, setHover] = useState<HoverState | null>(null);
+  const [selectedWeek, setSelectedWeek] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedWeek) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setSelectedWeek(null);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [selectedWeek]);
 
   if (topics.length === 0) {
     return (
@@ -48,6 +59,16 @@ export function BlindspotHeatmap({
     <div className="relative">
       <div className="overflow-x-auto pb-2">
         <div className="w-fit">
+          {selectedWeek && (
+            <div
+              className="mb-2 border border-hairline bg-surface px-3 py-2 font-mono text-[11px] text-text-primary shadow-sm"
+              role="status"
+            >
+              Week {weekNumber(selectedWeek)} · {selectedWeek} ·{" "}
+              {formatIsoWeekPeriod(selectedWeek)}
+            </div>
+          )}
+
           {/* Column headers (week labels) */}
           <div
             className="grid items-end gap-0.5 pb-1.5"
@@ -56,14 +77,28 @@ export function BlindspotHeatmap({
             }}
           >
             <div />
-            {weeks.map((week) => (
-              <div
-                key={week}
-                className="text-center font-mono text-[9px] text-text-secondary"
-              >
-                {weekNumber(week)}
-              </div>
-            ))}
+            {weeks.map((week) => {
+              const period = formatIsoWeekPeriod(week);
+              const isSelected = selectedWeek === week;
+              return (
+                <button
+                  key={week}
+                  type="button"
+                  onClick={() =>
+                    setSelectedWeek((prev) => (prev === week ? null : week))
+                  }
+                  aria-pressed={isSelected}
+                  aria-label={`Week ${weekNumber(week)}, ${week}, ${period}`}
+                  className={cn(
+                    "rounded-sm text-center font-mono text-[9px] text-text-secondary transition-colors",
+                    "hover:bg-white/10 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-white/40",
+                    isSelected && "bg-white/15 font-medium text-text-primary"
+                  )}
+                >
+                  {weekNumber(week)}
+                </button>
+              );
+            })}
           </div>
 
           {/* Rows */}
@@ -84,12 +119,13 @@ export function BlindspotHeatmap({
                   const state: BlindspotState = series[week] ?? "absent";
                   const color = STATE_COLORS[state];
                   const isAbsent = state === "absent";
+                  const period = formatIsoWeekPeriod(week);
                   const delay = (rowIdx * 0.045 + colIdx * 0.012).toFixed(3);
                   return (
                     <button
                       key={week}
                       type="button"
-                      aria-label={`${topic}, week ${weekNumber(week)}: ${STATE_LABELS[state]}`}
+                      aria-label={`${topic}, week ${weekNumber(week)}, ${period}: ${STATE_LABELS[state]}`}
                       disabled={isAbsent}
                       onClick={() =>
                         !isAbsent && onCellClick({ topic, week, state })
@@ -175,6 +211,9 @@ export function BlindspotHeatmap({
         >
           <div className="font-mono text-[10px] uppercase tracking-wider text-text-secondary">
             {hover.topic} · Week {weekNumber(hover.week)}
+          </div>
+          <div className="font-mono text-[10px] text-text-secondary/90">
+            {formatIsoWeekPeriod(hover.week)}
           </div>
           <div
             className="text-xs font-medium"
