@@ -2,8 +2,6 @@
 
 A media analysis web app that tracks **coverage asymmetry over time**: which news topics receive uneven attention across the political spectrum, week by week.
 
-Live site: [political-bias-analysis.vercel.app](https://political-bias-analysis.vercel.app/analyze). Production deploys from `main` on Vercel.
-
 ---
 
 Most bias tools describe outlets. Blindspot Tracker describes **coverage**: when outlets on one side of the spectrum report heavily on a topic while outlets on the other largely do not, readers on the quieter side may never encounter the story in their usual feeds.
@@ -27,7 +25,6 @@ The app offers three views:
 - **Analysis:** OpenAI-compatible LLM API with keyword fallback
 - **Data:** Precomputed JSON (static at build time, no database)
 - **Ingestion:** Node.js ETL scripts (NewsData.io, GDELT DOC 2.0)
-- **Deploy:** Vercel
 
 ---
 
@@ -41,7 +38,7 @@ app/              Pages + /api/analyze server route
 components/       Heatmap, charts, disclaimers, UI
 ```
 
-Coverage data is fetched offline, committed as JSON, and served statically. This keeps Vercel deploys fast and predictable while allowing weekly data refreshes via script or CI.
+Coverage data is fetched offline, committed as JSON, and served as static files. Weekly refreshes run by script or CI.
 
 **Outlet bias:** 54 outlets rated using a three-organization consensus (AllSides, Ad Fontes Media, Media Bias Fact Check).
 
@@ -71,11 +68,11 @@ npm run fetch-data              # GDELT backfill (20-week window)
 npm run gen-data                # Regenerate sample data for offline demo
 ```
 
-The live site uses NewsData.io snapshots collected week by week. Charts show tracked weeks only.
+Charts use NewsData.io snapshots collected week by week, and they show tracked weeks only.
 
 ### Automated weekly updates
 
-A GitHub Actions workflow (`.github/workflows/weekly-newsdata.yml`) runs every Monday at 14:00 UTC, fetches a new NewsData snapshot, commits updated `data/*.json`, and pushes to `main`. Vercel redeploys on that push. The workflow reads `NEWSDATA_API_KEY` from the repository Actions secrets. It can also be started from the Actions tab.
+A GitHub Actions workflow (`.github/workflows/weekly-newsdata.yml`) runs every Monday at 14:00 UTC, fetches a new NewsData snapshot, commits updated `data/*.json`, and pushes to `main`. The workflow reads `NEWSDATA_API_KEY` from the repository Actions secrets. It can also be started from the Actions tab.
 
 ---
 
