@@ -1,6 +1,5 @@
 {
   "weeks": [
-    "2026-W22",
     "2026-W23",
     "2026-W24",
     "2026-W25",
@@ -19,11 +18,11 @@
     "2026-W38",
     "2026-W39",
     "2026-W40",
-    "2026-W41"
+    "2026-W41",
+    "2026-W42"
   ],
   "topics": {
     "Immigration": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -42,10 +41,10 @@
       "2026-W38": "balanced",
       "2026-W39": "balanced",
       "2026-W40": "balanced",
-      "2026-W41": "balanced"
+      "2026-W41": "balanced",
+      "2026-W42": "balanced"
     },
     "Climate": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -64,10 +63,10 @@
       "2026-W38": "balanced",
       "2026-W39": "balanced",
       "2026-W40": "balanced",
-      "2026-W41": "right-blindspot"
+      "2026-W41": "right-blindspot",
+      "2026-W42": "right-blindspot"
     },
     "Gun Control": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -86,10 +85,10 @@
       "2026-W38": "absent",
       "2026-W39": "absent",
       "2026-W40": "absent",
-      "2026-W41": "right-blindspot"
+      "2026-W41": "right-blindspot",
+      "2026-W42": "right-blindspot"
     },
     "Healthcare": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -108,10 +107,10 @@
       "2026-W38": "left-blindspot",
       "2026-W39": "right-blindspot",
       "2026-W40": "left-blindspot",
-      "2026-W41": "absent"
+      "2026-W41": "absent",
+      "2026-W42": "left-blindspot"
     },
     "Foreign Policy": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -130,10 +129,10 @@
       "2026-W38": "balanced",
       "2026-W39": "balanced",
       "2026-W40": "balanced",
-      "2026-W41": "balanced"
+      "2026-W41": "balanced",
+      "2026-W42": "balanced"
     },
     "Economy": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -152,10 +151,10 @@
       "2026-W38": "balanced",
       "2026-W39": "balanced",
       "2026-W40": "balanced",
-      "2026-W41": "balanced"
+      "2026-W41": "balanced",
+      "2026-W42": "right-blindspot"
     },
     "Education": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -174,10 +173,10 @@
       "2026-W38": "balanced",
       "2026-W39": "balanced",
       "2026-W40": "balanced",
-      "2026-W41": "balanced"
+      "2026-W41": "balanced",
+      "2026-W42": "left-blindspot"
     },
     "Crime": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -196,10 +195,10 @@
       "2026-W38": "left-blindspot",
       "2026-W39": "left-blindspot",
       "2026-W40": "balanced",
-      "2026-W41": "left-blindspot"
+      "2026-W41": "left-blindspot",
+      "2026-W42": "right-blindspot"
     },
     "Science": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -218,10 +217,10 @@
       "2026-W38": "right-blindspot",
       "2026-W39": "right-blindspot",
       "2026-W40": "left-blindspot",
-      "2026-W41": "absent"
+      "2026-W41": "absent",
+      "2026-W42": "absent"
     },
     "Local Politics": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -240,10 +239,10 @@
       "2026-W38": "left-blindspot",
       "2026-W39": "left-blindspot",
       "2026-W40": "balanced",
-      "2026-W41": "left-blindspot"
+      "2026-W41": "left-blindspot",
+      "2026-W42": "left-blindspot"
     },
     "International": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -262,10 +261,10 @@
       "2026-W38": "right-blindspot",
       "2026-W39": "right-blindspot",
       "2026-W40": "right-blindspot",
-      "2026-W41": "left-blindspot"
+      "2026-W41": "left-blindspot",
+      "2026-W42": "right-blindspot"
     },
     "Religion": {
-      "2026-W22": "absent",
       "2026-W23": "absent",
       "2026-W24": "absent",
       "2026-W25": "absent",
@@ -284,7 +283,8 @@
       "2026-W38": "left-blindspot",
       "2026-W39": "left-blindspot",
       "2026-W40": "balanced",
-      "2026-W41": "left-blindspot"
+      "2026-W41": "left-blindspot",
+      "2026-W42": "right-blindspot"
     }
   }
 }
