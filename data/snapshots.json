@@ -1,68 +1,6 @@
 {
   "schema": 1,
   "snapshots": {
-    "2026-W26": {
-      "Immigration": {
-        "left": 25,
-        "right": 38,
-        "center": 0
-      },
-      "Climate": {
-        "left": 6,
-        "right": 5,
-        "center": 0
-      },
-      "Gun Control": {
-        "left": 1,
-        "right": 1,
-        "center": 0
-      },
-      "Healthcare": {
-        "left": 3,
-        "right": 11,
-        "center": 0
-      },
-      "Foreign Policy": {
-        "left": 4,
-        "right": 7,
-        "center": 0
-      },
-      "Economy": {
-        "left": 22,
-        "right": 22,
-        "center": 0
-      },
-      "Education": {
-        "left": 17,
-        "right": 38,
-        "center": 0
-      },
-      "Crime": {
-        "left": 0,
-        "right": 1,
-        "center": 0
-      },
-      "Science": {
-        "left": 1,
-        "right": 1,
-        "center": 0
-      },
-      "Local Politics": {
-        "left": 1,
-        "right": 10,
-        "center": 0
-      },
-      "International": {
-        "left": 2,
-        "right": 3,
-        "center": 0
-      },
-      "Religion": {
-        "left": 6,
-        "right": 12,
-        "center": 0
-      }
-    },
     "2026-W27": {
       "Immigration": {
         "left": 15,
@@ -898,6 +836,68 @@
       "Religion": {
         "left": 6,
         "right": 3,
+        "center": 0
+      }
+    },
+    "2026-W46": {
+      "Immigration": {
+        "left": 22,
+        "right": 20,
+        "center": 0
+      },
+      "Climate": {
+        "left": 11,
+        "right": 0,
+        "center": 0
+      },
+      "Gun Control": {
+        "left": 0,
+        "right": 1,
+        "center": 0
+      },
+      "Healthcare": {
+        "left": 5,
+        "right": 5,
+        "center": 0
+      },
+      "Foreign Policy": {
+        "left": 6,
+        "right": 5,
+        "center": 0
+      },
+      "Economy": {
+        "left": 16,
+        "right": 25,
+        "center": 0
+      },
+      "Education": {
+        "left": 15,
+        "right": 13,
+        "center": 0
+      },
+      "Crime": {
+        "left": 0,
+        "right": 0,
+        "center": 0
+      },
+      "Science": {
+        "left": 0,
+        "right": 0,
+        "center": 0
+      },
+      "Local Politics": {
+        "left": 1,
+        "right": 1,
+        "center": 0
+      },
+      "International": {
+        "left": 2,
+        "right": 3,
+        "center": 0
+      },
+      "Religion": {
+        "left": 3,
+        "right": 2,
         "center": 0
       }
     }
