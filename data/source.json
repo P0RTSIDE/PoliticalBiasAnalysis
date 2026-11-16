@@ -1,6 +1,6 @@
 {
   "mode": "live-newsdata",
-  "fetchedAt": "2026-11-09T23:15:24.592Z",
+  "fetchedAt": "2026-11-16T23:10:19.921Z",
   "weeks": 20,
   "weeksCollected": 15,
   "provider": "NewsData.io (latest, 48h snapshots)",
